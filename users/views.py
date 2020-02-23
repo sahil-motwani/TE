@@ -45,4 +45,5 @@ def profile(request):
     return render(request,'users/profile.html',context)
 
 def questions(request):
-    return redirect('questions')
+    print("call")
+    return render(request, 'users/questions.html')

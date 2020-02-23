@@ -10,3 +10,12 @@ class Post(models.Model):
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     def __str__(self):
         return self.title
+
+class Code(models.Model):
+    code = models.CharField(max_length=255)
+    code_means = models.CharField(max_length=255)
+
+class CombinedCodeTable(models.Model):
+    combinedcode = models.CharField(max_length=255)
+    combinedcode_means = models.CharField(max_length=255)
+    description = models.TextField(max_length=600)
