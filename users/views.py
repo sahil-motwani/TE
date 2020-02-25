@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,ProfileRegisterForm
+#from .models import questions
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -44,6 +45,14 @@ def profile(request):
     }
     return render(request,'users/profile.html',context)
 
-def questions(request):
-    print("call")
-    return render(request, 'users/questions.html')
+def question(request):
+    if request.method == 'POST':
+        #if request.POST('question1') and request.POST('question2') and request.POST('question3') and request.POST('question4'):
+        #post1=questions()
+            #post.title= request.POST.get('title')
+            #post.content= request.POST.get('content')
+        #post1.save()   
+        #return redirect(request, 'profile')  
+        pass
+    else:
+        return render(request, 'users/questions.html')
