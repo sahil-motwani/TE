@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm,ProfileRegisterForm
+from .models import Questions
 # Create your views here.
 def register(request):
     if request.method=='POST':
@@ -15,7 +16,8 @@ def register(request):
             p_reg_form.save()
             username=form.cleaned_data.get('username')
             messages.success(request, "Your Account has been created ! Answer some questions then you can now login")
-            return redirect('questions')
+            #data={'user':user}
+            return redirect('question')
     else:
         form=UserRegisterForm()
         p_reg_form = ProfileRegisterForm()
@@ -44,6 +46,18 @@ def profile(request):
     }
     return render(request,'users/profile.html',context)
 
-def questions(request):
-    print("call")
-    return render(request, 'users/questions.html')
+def question(request):
+    if request.method == 'POST':
+        if request.POST.get('question1') and request.POST.get('question2') and request.POST.get('question3') and request.POST.get('question4'):
+            q1=request.POST.get('question1')
+            q2=request.POST.get('question2')
+            q3=request.POST.get('question3')
+            q4=request.POST.get('question4')
+            #username=request.POST.get('user.username')
+            #user_id=request.POST.get('user.id')
+            post=Questions(username=request.user.username,question1=q1,question2=q2,question3=q3,question4=q4,user_id=request.user.id)
+            #post=Questions(username=username,question1=q1,question2=q2,question3=q3,question4=q4,user_id=user_id)
+            post.save()
+            return redirect('profile')  
+    else:
+        return render(request,'users/question.html')
