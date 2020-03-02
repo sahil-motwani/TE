@@ -4,7 +4,7 @@ from PIL import Image
 import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
-class profile(models.Model):
+class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     image=models.ImageField(default='default.jpg',upload_to='profile_pics')
     city = models.CharField("City", max_length=50, blank=True)
@@ -24,4 +24,14 @@ class profile(models.Model):
             output_size=(300,300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
+class Questions(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    username=models.CharField('username',max_length=50,primary_key=True)
+    question_code1 = (('I', 'Introvert'),('E', 'Extrovert'))
+    question_code2 = (('S', 'Sensing'),('N', 'Intutive'))
+    question_code3 = (('T', 'Thinking'),('F', 'Feeling'))
+    question_code4 = (('J', 'Judging'),('P', 'Perceiving'))
+    question1 = models.CharField(default='I',max_length=1, choices=question_code1)
+    question2 = models.CharField(default='S',max_length=1, choices=question_code2)
+    question3 = models.CharField(default='T',max_length=1, choices=question_code3)
+    question4 = models.CharField(default='J',max_length=1, choices=question_code4)

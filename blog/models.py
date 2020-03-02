@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Post(models.Model):
@@ -22,6 +23,7 @@ class CombinedCodeTable(models.Model):
 
 class MoodStress(models.Model):
     
+    username=models.CharField(max_length=50,primary_key=True)
     angry = models.FloatField()
     disgust = models.FloatField()
     fear = models.FloatField()
@@ -29,4 +31,9 @@ class MoodStress(models.Model):
     neutral = models.FloatField()
     sad = models.FloatField()
     surprise = models.FloatField()
+    created = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return self.username
     
