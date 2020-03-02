@@ -19,3 +19,14 @@ class CombinedCodeTable(models.Model):
     combinedcode = models.CharField(max_length=255)
     combinedcode_means = models.CharField(max_length=255)
     description = models.TextField(max_length=600)
+
+class MoodStress(models.Model):
+    
+    angry = models.FloatField()
+    disgust = models.FloatField()
+    fear = models.FloatField()
+    happy = models.FloatField()
+    neutral = models.FloatField()
+    sad = models.FloatField()
+    surprise = models.FloatField()
+    

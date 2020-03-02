@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Post,Code,CombinedCodeTable
+
+from .models import *
 # Register your models here.
 admin.site.register(Post)
 admin.site.register(Code)
 admin.site.register(CombinedCodeTable)
+admin.site.register(MoodStress)
