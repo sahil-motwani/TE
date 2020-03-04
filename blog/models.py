@@ -23,7 +23,7 @@ class CombinedCodeTable(models.Model):
 
 class MoodStress(models.Model):
     
-    username=models.CharField(max_length=50,primary_key=True)
+    username=models.CharField(max_length=50)
     angry = models.FloatField()
     disgust = models.FloatField()
     fear = models.FloatField()
@@ -33,7 +33,8 @@ class MoodStress(models.Model):
     surprise = models.FloatField()
     created = models.DateTimeField(auto_now=True)
 
-
+    class Meta:
+        unique_together = ('username', 'created')
     def __str__(self):
         return self.username
     
