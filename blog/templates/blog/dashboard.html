@@ -7,7 +7,6 @@ Dashboard
 
 {% include "blog/navbar.html" %}  
 
-
 <div class="container-fluid mt-5">
 
     
@@ -25,7 +24,7 @@ Dashboard
           <tr>
             <th scope="row">{{forloop.counter}}</th>
             <td>{{ employee.user }}</td>
-            <td><a href="" class="btn btn-primary">View Record</a></td>
+            <td><a href="{% url 'blog-chartpage' employee.user%}" class="btn btn-primary">View Mood Reports</a></td>
           </tr>
         {% endfor %}
       </tbody>

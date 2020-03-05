@@ -1,7 +1,12 @@
 import json
+from datetime import datetime
+
 print(type(json))
-from django.shortcuts import render
+from django.shortcuts import render,redirect, HttpResponse, get_object_or_404
+
 from django.views.generic import TemplateView, ListView
+from django.views import View
+
 from users.models import Profile
 from .models import Post,MoodStress
 #from django.http import HttpResponse
@@ -45,3 +50,65 @@ def dashboard(request):
         print(i)
         print(i.user)
     return render(request, 'blog/dashboard.html',{'employees':all_employees})
+
+def chartpage(request,username):
+    print(username)
+    context={}
+    moodstress_emp = MoodStress.objects.filter(username=username )
+    print(moodstress_emp)
+    lst = list(moodstress_emp)
+    lstc = lst.copy()
+    for i in lst:
+        if(i.created.date().day < datetime.now().day-7):
+            print(i)
+            lstc.remove(i)
+    print(lstc)
+    context={
+        'chart':lstc
+    }
+    print(context)
+    print(lstc[0].angry)
+    angry=0.0
+    disgust=0.0
+    fear=0.0
+    happy=0.0
+    neutral=0.0
+    sad=0.0
+    surprise=0.0
+    dictt={}
+    
+    for i in context['chart']:
+        print(i.angry)
+        angry = angry + i.angry
+        disgust = disgust + i.disgust
+        fear = fear + i.fear
+        happy = happy + i.happy
+        neutral = neutral + i.neutral
+        sad = sad + i.sad
+        surprise = surprise + i.surprise
+    dictt['angry']=angry
+    dictt['disgust']=disgust
+    dictt['fear']=fear
+    dictt['happy']=happy
+    dictt['neutral']=neutral
+    dictt['sad']=sad
+    dictt['surprise']=surprise
+    print(dictt)
+    print(dictt['angry'])
+    # for i in dictt:
+    #     total = total + dictt[i]
+    
+    mood_dict={
+        'emotions':dictt
+    }
+    print(mood_dict)
+    return render(request,'blog/charts.html', mood_dict)
+    
+    
+    
+#class chartview(View):
+    #pylint: disable=unused-argument
+def chartview(self,request, *args, **kwargs):
+    moodchart = get_object_or_404(MoodStress, username=self.kwargs.get('username'))
+    print("hey")
+    return redirect("about.html")
