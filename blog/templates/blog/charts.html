@@ -2,12 +2,24 @@
 {%block title %}
 Dashboard 
 {% endblock title %}
+
+{%block content%}
+        <h1>hey</h1>
+        {% include "blog/navbar.html" %} 
+        {% for emotion in emotions %}
+
+            {{emotions.angry}}
+        {% endfor %}
+        <canvas id="myChart" width="400" height="400"></canvas>
+
+{%endblock content%}
+
 {% block scripts%}
     <script>
         $(document).ready(function(){
             console.log("hey");
             var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = Chart(ctx,{
+            var myChart =new Chart(ctx,{
                 type:'pie',
                 data:{
                     labels:["angry","disgust","fear","happy","neutral","sad","surprise"],
@@ -48,13 +60,3 @@ Dashboard
     
     </script>
 {%endblock scripts%}
-{%block content%}
-        <h1>hey</h1>
-        {% include "blog/navbar.html" %} 
-        {% for emotion in emotions %}
-
-            {{emotions.angry}}
-        {% endfor %}
-        <canvas id="myChart" width="400" height="400"></canvas>
-
-{%endblock content%}
