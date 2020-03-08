@@ -22,7 +22,7 @@ class CombinedCodeTable(models.Model):
     description = models.TextField(max_length=600)
 
 class MoodStress(models.Model):
-    
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     username=models.CharField(max_length=50)
     angry = models.FloatField()
     disgust = models.FloatField()
@@ -34,7 +34,17 @@ class MoodStress(models.Model):
     created = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ('username', 'created')
+        unique_together = ('user_id', 'created')
     def __str__(self):
         return self.username
+
+
+class HowsDay(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,primary_key=True)
+    feeling=models.CharField(max_length=10)
+    created = models.DateTimeField(auto_now=True)
+    class Meta:
+        unique_together = ('user_id', 'created')
+    def __str__(self):
+        return self.user_id
     

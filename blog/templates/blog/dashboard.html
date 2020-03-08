@@ -24,7 +24,7 @@ Dashboard
           <tr>
             <th scope="row">{{forloop.counter}}</th>
             <td>{{ employee.user }}</td>
-            <td><a href="{% url 'blog-chartpage' employee.user%}" class="btn btn-primary">View Mood Reports</a></td>
+            <td><a href="{% url 'blog-chartpage' employee.user_id%}" class="btn btn-primary">View Mood Reports</a></td>
           </tr>
         {% endfor %}
       </tbody>
