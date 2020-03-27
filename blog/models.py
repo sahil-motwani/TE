@@ -40,7 +40,7 @@ class MoodStress(models.Model):
 
 
 class HowsDay(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE,primary_key=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     feeling=models.CharField(max_length=10)
     created = models.DateTimeField(auto_now=True)
     class Meta:
