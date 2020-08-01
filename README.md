@@ -9,4 +9,4 @@ employees are not in good mood most of time while working, HR can
 consult them, Help them which will ultimately motivate employees to do
 quality work.
 # To Read in detail about our work you can check out the research paper we presented in Conference of IEMIS 2020
-![Research Paper](FINAL accepted_IEMIS_StressInEmployees_SpringerPaper.pdf)
+!(FINAL accepted_IEMIS_StressInEmployees_SpringerPaper.pdf)
